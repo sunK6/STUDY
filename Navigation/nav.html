@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<title> Tree 형 내비게이션 </title>
+<script type="text/javascript" src="jquery-1.7.2.min.js"></script>
+<script>
+	$(function(){ ///////////////// jQB //////////////////////////////////
+
+		// 서브메뉴전체 숨기기 + 첫번째 서브보이기 //
+		$(".sub").hide().first().show();
+
+		// 상위 메뉴(.title) 클릭 시 하위메뉴 보이기(slideDown) //
+		$(".title").click(function(){
+			// 클릭된 메뉴 (this)의 다음 형제요소(next)를 보여라!
+			$(this).next().slideToggle(400)
+			// 다른 형제요소의 서브메뉴는 닫기(slideUp)
+			.parent().siblings().find(".sub").slideUp(400);
+
+		}); ///////////// click ///////////
+
+
+	}); ////////////////////////////// jQB ////////////////////////////////
+</script>
+<style type="text/css">
+body {
+	margin:20px auto;
+	padding:0;	
+	width:200px;
+	font-size:13px;
+	font-family:Arial, Helvetica, sans-serif;
+}
+ul#navi {
+	width:200px; 
+	text-indent:10px;
+}
+
+ul#navi, ul#navi ul {
+	list-style:none;
+	margin:0px;
+	padding:0px;
+}
+
+li.group {
+	margin-bottom:3px;
+}
+
+div.title {
+	height:35px;
+	line-height:3;
+	background:#9AB92E;
+	cursor:pointer;
+}
+			
+			
+			
+ul.sub li{
+	height:35px;
+	margin-bottom:2px;
+	line-height:3;
+	background:#FDF6DD;
+	cursor:pointer;
+}
+
+ul.sub li a{
+	text-decoration:none;
+	display:block;
+	width:100%;
+	height:100%;
+	color:#000;
+}
+			
+ul.sub li:hover{	background:#CCFF00;	}
+</style>
+</head>
+
+<body>
+
+
+<ul id="navi">
+     <li class="group">
+         <div class="title"> Title 1 </div>
+         <ul class="sub">
+           <li><a href="#"> sub1 </a></li> 
+           <li><a href="#"> sub1 </a></li> 
+           <li><a href="#"> sub1 </a></li> 
+         </ul>
+     </li>  
+     <li class="group">
+         <div class="title"> Title 2 </div>
+         <ul class="sub">
+           <li><a href="#"> sub1 </a></li>            
+         </ul>
+     </li>
+     <li class="group">
+         <div class="title"> Title 3 </div>
+         <ul class="sub">
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+         </ul>
+     </li>    
+     <li class="group">
+         <div class="title"> Title 4 </div>
+         <ul class="sub">
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+         </ul>
+     </li>    
+     <li class="group">
+         <div class="title"> Title 5 </div>
+         <ul class="sub">
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+           <li><a href="#"> sub1 </a></li>  
+         </ul>
+     </li>    
+</ul>
+
+
+<!---------- jQuery code Start ---------->
+<script>
+
+</script>
+</body>
+</html>
+
+
+
+
+
+
+
