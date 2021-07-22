@@ -7,6 +7,7 @@
 	<title> 슬라이딩 내비게이션(무한이동) - 드래그기능 </title>
 	<script src="jquery-1.7.2.min.js"></script>
 	<script src="jquery-ui.min.js"></script>
+	<script src="jquery-touch-punch.min.js"></script>
 	<script>
 		/// 슬라이드 순번 ///
 		let snum = 0;
@@ -86,7 +87,9 @@
 				sbx // 슬라이드박스
 					.prepend(sbx.find("li").last()) // 맨앞이동
 					.css({
-						left: "-100%"
+						left: (-$(".vbx").width()+sbx.position().left)+"px"
+						// $(".vbx").width() 동적으로 변경되는 가로크기
+						// 드래그시 이동된 위치만큼 left값 보정!
 					}) // left값 -100%변경
 					/// 애니메이션 들어오기 
 					.animate({
