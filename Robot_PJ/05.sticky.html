@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>Position - sticky</title>
+        <style>
+            body{
+                height: 3000px;
+                /* 스크롤이 생기게 높이값설정 */
+            }
+            div{
+                width: 100px;
+                height: 100px;
+                border: 2px solid blue;
+                /* 경계선;두종색(두께종류색) */
+                text-align: center;
+                /* 인라인요소 가로중앙정렬 */
+                font-size: 24px;
+                /* 글자크기 */
+                font-weight: bold;
+                /* 글자두껍게 */
+                line-height: 100px;
+                /* 줄간격 - 글자세로 중앙시 응용 */
+            }   
+            #stk{
+                position: sticky;
+                top: 0;
+                /* 
+                    [ sticky 포지션 ]
+                    1. 위치값 설정에 따라 보이는 화면에 고정되는 포지션
+                    2. 원리 : 처음에는 relative하게 가만히 있다가 자신의 위치값이 스크롤 위치가 설정된 값보다 커지면 fixed하게 고정한다 
+                    (이때 위치고정 설정값은 top값에 한다)
+                    - top값을 설정하지 않으면?
+                    relative하게 그대로 있게된다.
+                    (relative하게라고 한 이유는 left값이 설정된다.)
+                 */
+                left: 200px;
+                width: 500px;
+                background-color: pink;
+
+            }
+
+            #f1{
+                background-color: limegreen;
+                position: fixed;
+         
+            }
+            #f2{
+                position: fixed;
+                bottom: 20%;
+                right: 0;
+                width: 200px;
+                height: 400px;
+                background-color: orange;
+            }
+            .f3{
+                position: fixed;
+                left: 0;
+                bottom: 0;
+                background-color: red;
+            }
+            #a1{
+                background-color:greenyellow;
+                position: absolute;
+                right: 0;
+                bottom: 0;
+                /* 
+                    [ absolute 포지션 ]
+
+                    1. absolute 포지션은 위치이동값을 쓰기전과 쓴후로 나누어 볼 수 있다!
+
+                    1) 위치이동값을 쓰지 않은 경우
+                    - 자기보다 위에 있는 요소를 존중하여 그 아래에 위치한다.(젠틀앱솔루트) 
+                    - 자기보다 아래쪽에 있는 요소는 앱솔루트 요소를 인식하지 못하여 같은자리에 올라온다.
+                    - 어떤 요소 내부에 있는 자식요소가 앱솔루트일 경우 그 부모에 놓인 위치에서 가만히 있는다.(젠틀함)
+
+                    2) 위치이동값을 사용한 경우
+                    - 위치값을 사용한 부분에 대하여!!!!!!!!!만!!
+                    위치값이동의 기준이되는 부모요소를 찾!는!다. 
+                    (부모찾아 삼만리)
+
+                    2. 부모자격을 가진 요소의 조건은 무엇인가?
+                    >>>> 일반적인 부모요소는 싸고있는 요소이지만 앱솔루트가 위치를 잡을때의 부모요소는 .......?
+                    - static이 아닌 포지션을 가진 요소가 부모이다!!!
+                    - static이 아닌 포지션이란?
+                    relative/absolute/fixed
+
+                    3. 만약 부모자격이 모두 없으면 보이는 화면을 기준한다.
+                    - 보이는 화면은 body를 말하는 것이 아니다. 보이는 브라우저 window화면을 말하는것이다.
+                    - body에 position:relative를 주면 알수있다.
+
+                    4. 앱솔루트에 가로크기를 주지 않은 경우
+                     일반적으로 block요소이므로 auto로써 끝까지 채우기가 되는데 앱솔루트는 내용만큼만 그 크기를 자동으로 설정한다.
+                    -> 판타롱스타킹
+
+                    5. 인라인요소에 앱솔루트를 준 경우 
+                    자동으로 diplay가 block으로 설정됨 
+                    -> 일반적으로 앱솔루트는 block이다.
+
+                    6. absolute에 margin을 설정할경우 설정이 반영되는 경우는 위치설정과 같은 방향의 마진이 적용된다.
+                    예) top을적용했으면 margin-top
+                    예) left를적용했으면 margin-left
+                    예) bottom을적용했으면 margin-bottom
+                    예) right을적용했으면 margin-right
+
+                    -> 앱솔루트의 마진은 위치이동후 미세조정할때 사용할수도 있다.
+                    
+                    -> 위치이동값이 설정되지 않은 경우 기본기준위치가 top과 left이므로 margin-top, margin-left만 적용된다! 
+
+                    7. 위치이동값 초기화
+                    - 값으로 auto를 쓰면된다.
+                    - top:auto, left:auto, right:auto, bottom:auto 
+                    - 기존값을 해제할때도 auto를 쓴다.
+                    예) 기존에 left:50px 로 잡았다가 기준을바꿔서 코딩하려고 중간에 자바스크립트로 변경한다고 할때 left:auto라고 해주고 right:80px 이라고써야 left가 해제되고 right가 적용된다. 
+
+
+                    바깥에 레이아웃(부모)은 relative를 준다./가장가까운 부모에게 붙는다.
+                 */
+            }
+            #a2{
+                background-color: orangered;
+            }
+            #r1{
+                 position: relative;    
+                 /* 
+                    [ relative 포지션 ]
+                    1. 위치이동속성이 적용된다!!!
+
+                    2. 위치이동의 기준은 원래있던 위치임
+                    (그래서 상대적인 즉 relative 랠러티브 라는 명칭이 사용됨)
+
+                    3. 이동시 다른요소의 영향없이 겹쳐질수 있다!!!!
+
+                    4. 원래 자신이 있던 위치는 그대로 보존된다
+                    (의미: 기존위치가 보존되기 때문에 위치를 이동시켜도 본래디자인은 안망가진다.)
+
+                    5. 위치값 설정시 2가지 기준으로만 셋팅해야한다
+                    - 위아래중 하나, 우좌중 하나
+                    1) top, left
+                    2) top, right
+                    3) bottom, left
+                    4) bottom, right
+                    - 값 수치의 양수는 내부방향
+                                음수는 외부방향
+
+                    6. 마진은 그대로 적용된다
+                    (다른 static요소에 영향을 준다!
+                    - 원래위치에서 마진으로 밀고 있는것과 같다.)
+
+                    7. relative는 위치이동값을 사용하지 않으면 static과 똑같은 특징을 가진다!
+
+                    8. relative는 겹쳐질수있으므로 위아래 위치관계가 성립된다. 
+                    기본적인 위아래 위치관계는 아래와 같다.
+                     1) static보단 항상 위
+                     2) static이 아닌 포지션인경우 나중에 그려진 요소가 위(손놓고 손등때리기)
+                     3) z-index 속성으로 숫자가 크면 위
+
+                     [ z-index 란? ]
+                     - 겹치는 포지션일경우 위치순서를 정하여 디스플레이를 변경하는 속성
+
+                     - z는 화면방향의 z축을 말하며 기본값은 0이다. 이는 같은 층에 있다는 의미
+
+                     -> 포지션이 static이거나 아무 포지션을 안준경우엔 z-index가 전혀 적용되지 않음
+                     왜? 스스로 겹쳐질 수 없으므로! 
+
+                     - 결론적으로 포지션이 있는경우에만 사용할 수 있다! 
+
+                     -사용법: 
+                      z-index: 숫자
+                        - 숫자의 의미는 단순 위치 비교개념
+                        - 숫자가 높은 것이 위에 위치한다.
+
+                     -정리: static요소는 무조건 아래쪽에 깔린다! 
+                        - z-index의 숫자가 마이너스인 경우는 static요소보다 아래쪽으로 내린다는 의미임! 
+
+                        - 유의사항!!!
+                        -> z-index비교시 같은 형제레벨에 있어야 비교가 된다! 
+                        만약 자손요소의 z-index를 아무리 높이주어도 부모요소의 다른 요소가 z-index가 높다면 위로 올라올 수 없다. 따라서 같은 위치비교를 할 요소에 같은형제요소에서 z-index를 주어야한다.(부모요소에줌)
+
+
+                  */
+
+                 /* top: 50px;
+                 left: 50px; */
+                 /* 
+                    위치이동속성: 
+                    - 선택요소의 위치를 이동하기위한 속성
+                    - 포지션에 따라 달리 적용
+
+                    종류: 4가지
+                    - top, bottom, left, right
+                  */
+                  background-color: red;
+                  z-index: 1; /* 1만 써도 위로 올라옴
+                  다른 static아닌 포지션이 z-index가 있다면 숫자를 비교하여 위아래 관계를 디스플레이한다. */
+            }
+            #s2{
+                background-color: green;
+            }
+            #a2{
+                position: absolute;
+                top: 50%;
+                left: 50%;
+                /* 
+                    가로크기를 주지 않은 경우 앱솔루트는 내용만큼만 가로크기가 자동 설정된다.
+                    그리고!
+                    div와 같은 block이 아니어도 span같은 inline요소도 block요소로 자동전환된다! 
+                 */
+                font-size: 40px;
+                background-color: yellow;
+            }
+            #r2{
+                position: relative;
+                /* bottom: 75px;
+                right: -86px; */
+
+                background-color: skyblue;
+                z-idnex: -1;
+                /* z-index가 마이너스이면 static요소보다 아래로 내려간다!!! */
+            }
+
+            /* 부모찾아 삼만리 박스들 */
+            .s5{
+                position: relative;
+                width: 500px;
+                height: 500px;
+            }
+            .s6{
+                /* position: relative; */
+                width: 400px;
+                height: 400px;
+            }
+            .s7{
+                /* position: relative; */
+                width: 300px;
+                height: 300px;
+            }
+            .s8{
+                /* position: relative; */
+                width: 200px;
+                height: 200px;
+            }
+            /* 주인공 앱솔루트 */
+            .a3{
+                position: absolute;
+                top: 0;
+                right: 0;
+                /* 위치이동값을 쓴부분에 대하여 부모자격이 있는 요소를 찾아 위치를 잡는다. */
+
+                background-color: hotpink;
+            }
+
+            .a4{
+                position: absolute;
+                /* 젠틀앱솔루트- 처음 위치한 부모박스를 떠나지않고 가만히 있다!  */
+                background-color: #8a2be2;
+            }
+        </style>
+    </head>
+    <body>
+        <div id="r1">r1</div>
+        <div id="f1">f1</div>
+        <div id="a1">a1</div>
+        <div id="r2">r2</div>
+        <div id="s3">s3</div>
+        <div id="stk">난 스티키!!!</div>
+        <span id="a2">a2</span>
+        <div id="f2">f2</div>
+
+        <!-- 부모를 찾는 absolute요소 -->
+        <div class="s5">s5
+            <div class="s6">s6
+                <div class="s7">s7
+                    <div class="s8">s8
+                        <div class="a3">a3</div>
+                        <div class="a4">a4</div>
+                        <div class="f3">f3</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </body>
+</html>
